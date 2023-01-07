@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable-night/bottom_sheet_background.xml" value="0.187" />
+        <entry key="app/src/main/res/drawable-notnight/bottom_sheet_background.xml" value="0.187" />
+        <entry key="app/src/main/res/drawable-v24/btn_alert.xml" value="0.1255" />
+        <entry key="app/src/main/res/drawable-v24/btn_back_secondary.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable-v24/ic_posts_orange.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/bottom_sheet_background.xml" value="0.125" />
+        <entry key="app/src/main/res/drawable/btn_back_primary.xml" value="0.1585" />
+        <entry key="app/src/main/res/drawable/btn_background1.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/btn_empty_bordered.xml" value="0.132" />
+        <entry key="app/src/main/res/drawable/button_background_sheet.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_about.xml" value="0.1055" />
+        <entry key="app/src/main/res/drawable/ic_add_circle.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.1975" />
+        <entry key="app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_baseline_exit_to_app_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_help_24.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_baseline_send.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_baseline_turned_in.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_turned_in_not_24.xml" value="0.143" />
+        <entry key="app/src/main/res/drawable/ic_camera.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_cancel.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_cloud_done.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_comment.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_contact_us.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_drop_down_circle.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_folder.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_friend_requests.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1105" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_like.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_like_orange.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/ic_menu_dot.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_message.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_ondemand_video.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_outline_arrow_drop_down_circle_24.xml" value="0.1055" />
+        <entry key="app/src/main/res/drawable/ic_outline_notifications_none_24.xml" value="0.1105" />
+        <entry key="app/src/main/res/drawable/ic_outline_outlined_flag_24.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_outline_settings.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_person_add.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_play_arrow_video.xml" value="0.1015" />
+        <entry key="app/src/main/res/drawable/ic_play_video.xml" value="0.1055" />
+        <entry key="app/src/main/res/drawable/ic_posts.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_save_orange.xml" value="0.1155" />
+        <entry key="app/src/main/res/drawable/ic_search.xml" value="0.1105" />
+        <entry key="app/src/main/res/drawable/ic_settings.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_share.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_twotone_camera.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_upload.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/ic_videos.xml" value="0.123" />
+        <entry key="app/src/main/res/drawable/ic_videos_orange.xml" value="0.1375" />
+        <entry key="app/src/main/res/drawable/vector_exit.xml" value="0.1055" />
+        <entry key="app/src/main/res/drawable/vector_profile.xml" value="0.14" />
+        <entry key="app/src/main/res/layout/activity_comments.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_my_profile.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/activity_post_image.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_register_login.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_search.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.16032608695652173" />
+        <entry key="app/src/main/res/layout/activity_theme_settings.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_view_post.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_view_profile.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_view_video.xml" value="0.2699228791773779" />
+        <entry key="app/src/main/res/layout/bottom_sheet_comments.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/bottom_sheet_friends.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/bottom_sheet_my_post_menu.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/bottom_sheet_post_menu.xml" value="0.2196969696969697" />
+        <entry key="app/src/main/res/layout/bottom_sheet_post_report.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_profile_posts.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_videos.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/friend_requests_cardview.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/friends_cardview.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/layout_bottom_sheet.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/main_nav_header.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/my_friends_cardview.xml" value="0.17553191489361702" />
+        <entry key="app/src/main/res/layout/my_profile_posts_cardview.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/my_profile_videos_cardview.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/people_cardview.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/post_comments_cardview.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/post_notification_cardview.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/random_posts_cardview.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/random_videos_cardview.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2" />
+        <entry key="app/src/main/res/menu/main_menu.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/main_menu_nav.xml" value="0.33" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bottom_sheet_background"
+    android:id="@+id/bottomSheetPostReport"
+    android:paddingLeft="10dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/reason_for_the_report"
+        android:textColor="@color/color_bottom_sheet_text"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="4dp"
+        android:background="@color/gray"/>
+
+
+
+    <RadioGroup
+        android:id="@+id/radio_grp_report_reason"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <RadioButton
+            android:id="@+id/cb_sex_nude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sex_or_nudity_content" />
+
+        <RadioButton
+            android:id="@+id/cb_violence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/violence" />
+
+        <RadioButton
+            android:id="@+id/cb_terrorism"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/terrorism" />
+
+        <RadioButton
+            android:id="@+id/cb_harassment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/harassment" />
+
+        <RadioButton
+            android:id="@+id/cb_fraud"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fraud_or_scam" />
+
+        <RadioButton
+            android:id="@+id/cb_injury"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/injury" />
+
+        <RadioButton
+            android:id="@+id/cb_hate_speech"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hate_speech" />
+
+
+        <RadioButton
+            android:id="@+id/cb_false_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/false_information" />
+
+        <RadioButton
+            android:id="@+id/cb_some_else"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/something_else" />
+
+    </RadioGroup>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal"
+        android:gravity="bottom">
+
+        <EditText
+            android:id="@+id/et_report_comment"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/comment_your_reason_for_the_report"
+            android:gravity="start|bottom"
+            android:inputType="textMultiLine"
+            android:maxLines="5"
+            android:maxLength="150"/>
+
+        <Button
+            android:id="@+id/btn_send_report"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/send"
+            />
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

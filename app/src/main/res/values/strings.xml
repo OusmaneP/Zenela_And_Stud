@@ -1,0 +1,101 @@
+<resources>
+    <string name="app_name" translatable="false">Zenela</string>
+    <string name="title_activity_home" translatable="false">HomeActivity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="nav_support">Support</string>
+    <string name="actions" translatable="false">Actions</string>
+    <string name="nav_open_drawer" translatable="false">Open navigation drawer</string>
+    <string name="nav_close_drawer" translatable="false">Close navigation drawer</string>
+    <string name="login" translatable="false">Login</string>
+
+    <string name="email_or_phone_number">Email or phone number</string>
+    <string name="title_home">Posts</string>
+    <string name="title_videos">Videos</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="password_hint">Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="don_t_have_an_account_create_now">Don\'t have an account? Create now</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="first_name_hint">First name</string>
+    <string name="last_name_hint">Last name</string>
+    <string name="confirm_password_hint">Confirm password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="already_have_an_account_sign_in">Already have an account? Sign In</string>
+    <string name="email_or_password_wrong">Email or password wrong</string>
+    <string name="first_name_cannot_be_empty">First name cannot be empty</string>
+    <string name="email_cannot_be_empty">Email cannot be empty</string>
+    <string name="password_cannot_be_empty">Password cannot be empty</string>
+    <string name="password_confirm_cannot_be_empty">password confirmation cannot be empty</string>
+    <string name="confirm_should_match_password">Confirm should match password</string>
+    <string name="likes">Likes</string>
+    <string name="comments">comments</string>
+    <string name="save">Save</string>
+    <string name="see_more">See more</string>
+    <string name="saved_posts">Saved</string>
+    <string name="saved">✅  Saved</string>
+    <string name="unsaved">✅  UnSaved</string>
+    <string name="report_sent">✅  Report Sent</string>
+    <string name="comment_this_post_hint">Comment this post</string>
+    <string name="sent">✅  Sent</string>
+    <string name="report">Report</string>
+    <string name="reason_for_the_report">Reason for the report</string>
+    <string name="sex_or_nudity_content">Sex or Nudity Content</string>
+    <string name="violence">Violence</string>
+    <string name="terrorism">Terrorism</string>
+    <string name="harassment">Harassment</string>
+    <string name="fraud_or_scam">Fraud or scam</string>
+    <string name="injury">Injury</string>
+    <string name="hate_speech">Hate speech</string>
+    <string name="false_information">False information</string>
+    <string name="something_else">Something else</string>
+    <string name="comment_your_reason_for_the_report">Comment your reason for the report / max 150 caracters</string>
+    <string name="send">Send</string>
+    <string name="friends">Friends</string>
+    <string name="f_requests">Requests</string>
+    <string name="f_invited">Invited</string>
+    <string name="all_your_notifications_will_be_displayed_here">All your notifications will be displayed here</string>
+    <string name="and_others_reacted_to_your_post">and others reacted to your post</string>
+    <string name="profile_draw">Profile</string>
+    <string name="app_settings_draw">App Settings</string>
+    <string name="logout_draw">Logout</string>
+    <string name="help_draw">Help</string>
+    <string name="about_draw">About</string>
+    <string name="contact_us_draw">Contact us</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="create_post">Create post</string>
+    <string name="message">Message</string>
+    <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
+    <string name="personal_info">Personal Info</string>
+    <string name="bio_hint">Bio</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="change_password">Change password</string>
+    <string name="old_password_hint">Old password</string>
+    <string name="new_password_hint">New password</string>
+    <string name="save_password">Save Password</string>
+    <string name="add_friend">Add friend</string>
+    <string name="zero_search_result">0 result</string>
+    <string name="pick_image">Pick image</string>
+    <string name="enter_a_comment">Enter a comment</string>
+    <string name="upload">Upload</string>
+    <string name="post_image">Post an image</string>
+    <string name="cover">Cover</string>
+    <string name="profile">Profile photo</string>
+    <string name="or">Or</string>
+    <string name="random_people">Search random people</string>
+    <string name="delete_post">Delete post</string>
+    <string name="edit_post">Edit post</string>
+    <string name="edit_post_comment">Edit post comment</string>
+    <string name="submit">Submit</string>
+    <string name="pick_video">Pick Video</string>
+    <string name="deleting">Deleting…</string>
+    <string name="deleted_ic">✅ Deleted</string>
+    <string name="connection_failed_uc">❌ Connexion failed</string>
+    <string name="action_failed_ic">❌ Action failed</string>
+    <string name="tap_to_search">Tap to search…</string>
+
+    <string name="date_language">en</string>
+    <string name="date_country">US</string>
+
+</resources>
