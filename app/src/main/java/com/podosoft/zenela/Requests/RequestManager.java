@@ -40,7 +40,7 @@ public class RequestManager {
     OkHttpClient okHttpClient = new OkHttpClient();
     OkHttpClient clientWith1mTimeout = okHttpClient.newBuilder().readTimeout(5, TimeUnit.MINUTES).build();
     Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://192.168.146.118:8080/mobile/")
+            .baseUrl("http://192.168.77.118:8080/mobile/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(clientWith1mTimeout)
             .build();

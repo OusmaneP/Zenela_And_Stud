@@ -38,6 +38,8 @@ import com.podosoft.zenela.Responses.LoginResponse;
 import com.podosoft.zenela.Responses.ProfileResponse;
 import com.podosoft.zenela.ViewProfileActivity;
 import com.podosoft.zenela.ViewVideoActivity;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
@@ -119,7 +121,7 @@ public class RandomVideosAdapter extends RecyclerView.Adapter<RandomVideosViewHo
         holder.textView_comments.setText(String.format("%s %s", String.valueOf(post.getTotalComments()), context.getString(R.string.comments)));
 
         Picasso.get().load(post.getPosterProfile()).placeholder(R.drawable.profile2).error(R.drawable.profile2).into(holder.poster_profile);
-        Picasso.get().load(post.getThumbnail()).placeholder(R.drawable.video_placeholder).error(R.drawable.video_placeholder).into(holder.iv_thumb);
+        Picasso.get().load(post.getThumbnail()).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.video_placeholder).error(R.drawable.video_placeholder).into(holder.iv_thumb);
 
 
         // iv_thumb Clicked

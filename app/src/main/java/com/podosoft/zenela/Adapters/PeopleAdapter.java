@@ -49,7 +49,7 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleViewHolder>{
         User user = users.get(position);
 
         holder.user_name.setText(String.format("%s %s", user.getFirstName(), user.getLastName()));
-        Picasso.get().load(user.getProfile()).placeholder(R.drawable.profile2).into(holder.user_profile);
+        Picasso.get().load(user.getProfileThumb() == null || user.getProfileThumb().isEmpty() ? user.getProfile() : user.getProfileThumb()).placeholder(R.drawable.profile2).into(holder.user_profile);
 
         managerProfile = new RequestManagerProfile(context);
         // View Profile of Poster

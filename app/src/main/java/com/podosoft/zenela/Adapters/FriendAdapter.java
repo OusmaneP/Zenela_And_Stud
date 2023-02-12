@@ -55,7 +55,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendsViewHolder>{
     public void onBindViewHolder(@NonNull FriendsViewHolder holder, int position) {
         User user = users.get(position);
         holder.friend_name.setText(String.format("%s %s", user.getFirstName(), user.getLastName()));
-        Picasso.get().load(user.getProfile()).placeholder(R.drawable.profile2).into(holder.friend_profile);
+        Picasso.get().load(user.getProfileThumb() == null || user.getProfileThumb().isEmpty() ? user.getProfile() : user.getProfileThumb()).placeholder(R.drawable.profile2).into(holder.friend_profile);
 
         managerProfile = new RequestManagerProfile(context);
 

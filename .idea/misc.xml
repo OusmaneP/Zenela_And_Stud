@@ -69,6 +69,7 @@
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.16032608695652173" />
         <entry key="app/src/main/res/layout/activity_theme_settings.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_view_photo.xml" value="0.23697916666666666" />
         <entry key="app/src/main/res/layout/activity_view_post.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_view_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_view_video.xml" value="0.2699228791773779" />
@@ -94,7 +95,7 @@
         <entry key="app/src/main/res/layout/people_cardview.xml" value="0.1" />
         <entry key="app/src/main/res/layout/post_comments_cardview.xml" value="0.1" />
         <entry key="app/src/main/res/layout/post_notification_cardview.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/random_posts_cardview.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/random_posts_cardview.xml" value="0.25" />
         <entry key="app/src/main/res/layout/random_videos_cardview.xml" value="0.1" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2" />
         <entry key="app/src/main/res/menu/main_menu.xml" value="0.1" />
@@ -102,7 +103,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

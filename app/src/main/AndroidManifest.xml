@@ -19,6 +19,9 @@
         android:theme="@style/Theme.Zenela"
         tools:targetApi="31">
         <activity
+            android:name=".ViewPhotoActivity"
+            android:exported="false" />
+        <activity
             android:name=".ViewVideoActivity"
             android:exported="false" />
         <activity

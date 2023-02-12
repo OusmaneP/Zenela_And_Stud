@@ -92,7 +92,7 @@ public class HomeActivity extends ThemeSettingsActivity implements NavigationVie
         Intent intent = getIntent();
         LoginResponse loginResponse = (LoginResponse) intent.getSerializableExtra("loginResponse");
         // Put profile picture
-        Picasso.get().load(loginResponse.getPrincipal().getProfile()).placeholder(R.drawable.profile2).into(profileBtn);
+        Picasso.get().load(loginResponse.getPrincipal().getProfileThumb() == null || loginResponse.getPrincipal().getProfileThumb().isEmpty() ? loginResponse.getPrincipal().getProfile() : loginResponse.getPrincipal().getProfileThumb()).placeholder(R.drawable.profile2).into(profileBtn);
 
         // Post Notifications
         if (loginResponse.getPostNotifications() > 0){

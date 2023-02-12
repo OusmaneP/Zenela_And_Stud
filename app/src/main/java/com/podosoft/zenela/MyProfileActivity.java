@@ -329,7 +329,7 @@ public class MyProfileActivity extends ThemeSettingsActivity implements Progress
         tv_request.setText(String.format("%s", response.getFriendRequests().size()));
         tv_invited.setText(String.format("%s", response.getInvitedFriends().size()));
         Picasso.get().load(response.getPrincipal().getCover()).placeholder(R.drawable.placeholder_image).into(iv_cover);
-        Picasso.get().load(response.getPrincipal().getProfile()).placeholder(R.drawable.profile3).into(iv_profile);
+        Picasso.get().load(response.getPrincipal().getProfileThumb() == null || response.getPrincipal().getProfileThumb().isEmpty() ? response.getPrincipal().getProfile() : response.getPrincipal().getProfileThumb()).placeholder(R.drawable.profile3).into(iv_profile);
     }
 
     // populateFragment

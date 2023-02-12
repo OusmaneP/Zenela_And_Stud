@@ -120,6 +120,16 @@ public class ViewProfileActivity extends ThemeSettingsActivity implements Progre
                 }
             }
         });
+
+        // Profile Photo Clicked
+        iv_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ViewProfileActivity.this, ViewPhotoActivity.class);
+                intent.putExtra("photo_link", response.getPrincipal().getProfile());
+                startActivity(intent);
+            }
+        });
     }
 
     // populate profile
@@ -128,8 +138,8 @@ public class ViewProfileActivity extends ThemeSettingsActivity implements Progre
         tv_friends.setText(String.format("%s", response.getMyFriends().size()));
         tv_request.setText(String.format("%s", response.getFriendRequests().size()));
         tv_invited.setText(String.format("%s", response.getInvitedFriends().size()));
-        Picasso.get().load(response.getPrincipal().getCover()).placeholder(R.drawable.placeholder_image).into(iv_cover);
-        Picasso.get().load(response.getPrincipal().getProfile()).placeholder(R.drawable.profile3).into(iv_profile);
+        Picasso.get().load(response.getPrincipal().getCover()).placeholder(R.drawable.placeholder_image).error(R.drawable.placeholder_image).into(iv_cover);
+        Picasso.get().load(response.getPrincipal().getProfileThumb() == null || response.getPrincipal().getProfileThumb().isEmpty() ? response.getPrincipal().getProfile() : response.getPrincipal().getProfileThumb()).placeholder(R.drawable.profile3).error(R.drawable.profile3).into(iv_profile);
         // btn Add Friend
         if (!response.getFriends() && !response.getPrincipal().getId().equals(principalId)){
             btn_invite_friend.setVisibility(View.VISIBLE);

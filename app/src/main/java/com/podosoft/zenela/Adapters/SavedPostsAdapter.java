@@ -118,10 +118,10 @@ public class SavedPostsAdapter extends RecyclerView.Adapter<SavedPostViewHolder>
         Picasso.get().load(post.getPosterProfile()).placeholder(R.drawable.profile2).error(R.drawable.profile2).into(holder.poster_profile);
 
         if (post.getType().contains("image")) {
-            Picasso.get().load(post.getFileName()).placeholder(R.drawable.placeholder_image).error(R.drawable.placeholder_image).into(holder.imageView_post);
+            Picasso.get().load(post.getFileName()).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.placeholder_image).error(R.drawable.placeholder_image).into(holder.imageView_post);
         }
         else if(post.getType().contains("video")){
-            Picasso.get().load(post.getThumbnail()).placeholder(R.drawable.video_placeholder).error(R.drawable.video_placeholder).into(holder.imageView_post);
+            Picasso.get().load(post.getThumbnail()).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.video_placeholder).error(R.drawable.video_placeholder).into(holder.imageView_post);
 
             holder.imageView_post.setOnClickListener(new View.OnClickListener() {
                 @Override
