@@ -30,6 +30,7 @@
     <color name="gray">#D1D1D1</color>
     <color name="red">#FF0000</color>
     <color name="ic_color">#FF000000</color>
+    <color name="gray_day_night">#D1D1D1</color>
 
 
 <!--    UnChanged-->

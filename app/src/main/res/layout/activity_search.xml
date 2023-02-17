@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:queryHint="@string/tap_to_search"
+            app:iconifiedByDefault="false"
             />
 
     </androidx.appcompat.widget.Toolbar>

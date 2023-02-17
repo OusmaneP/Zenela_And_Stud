@@ -1,5 +1,6 @@
 package com.podosoft.zenela;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
@@ -18,9 +19,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.podosoft.zenela.Adapters.FriendAdapter;
 import com.podosoft.zenela.Fragments.ProfilePostsFragment;
@@ -30,6 +33,7 @@ import com.podosoft.zenela.Listeners.RandomPostsResponseListener;
 import com.podosoft.zenela.Listeners.RandomVideosResponseListener;
 import com.podosoft.zenela.Models.Post;
 import com.podosoft.zenela.Models.User;
+import com.podosoft.zenela.MyHelpers.GeneralHelper;
 import com.podosoft.zenela.Requests.RequestManagerProfile;
 import com.podosoft.zenela.Responses.ProfileResponse;
 import com.podosoft.zenela.Responses.RandomPostsResponse;
@@ -44,7 +48,7 @@ public class MyProfileActivity extends ThemeSettingsActivity implements Progress
     RequestManagerProfile managerProfile;
 
     ImageView iv_cover, iv_profile, iv_chg_cover, iv_chg_profile, iv_layout_prof_images, iv_layout_prof_saved, iv_layout_prof_videos;
-    TextView tv_name, tv_friends, tv_request, tv_invited;
+    TextView tv_name, tv_friends, tv_request, tv_invited, tv_bio;
     Button btn_create_post, btn_edit_profile;
     ProgressBar progressBarHorizon;
 
@@ -65,6 +69,7 @@ public class MyProfileActivity extends ThemeSettingsActivity implements Progress
 
     int friendRequestExtra;
 
+    GeneralHelper generalHelper;
     // onCreate
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
@@ -76,8 +81,10 @@ public class MyProfileActivity extends ThemeSettingsActivity implements Progress
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Profile");
         setSupportActionBar(toolbar);
+        
 
         // init views
+        generalHelper = new GeneralHelper();
 
         iv_cover = findViewById(R.id.iv_cover);
         iv_profile = findViewById(R.id.iv_profile);
@@ -87,6 +94,7 @@ public class MyProfileActivity extends ThemeSettingsActivity implements Progress
         tv_invited = findViewById(R.id.tv_invited);
         iv_chg_cover = findViewById(R.id.iv_chg_cover);
         iv_chg_profile = findViewById(R.id.iv_chg_profile);
+        tv_bio = findViewById(R.id.tv_bio);
 
         layout_prof_images = findViewById(R.id.layout_prof_images);
         layout_prof_videos = findViewById(R.id.layout_prof_videos);
@@ -173,6 +181,26 @@ public class MyProfileActivity extends ThemeSettingsActivity implements Progress
             }
         });
 
+        // Profile Photo Clicked
+        iv_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyProfileActivity.this, ViewPhotoActivity.class);
+                intent.putExtra("photo_link", principal.getProfile());
+                startActivity(intent);
+            }
+        });
+
+        // Cover Photo Clicked
+        iv_cover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyProfileActivity.this, ViewPhotoActivity.class);
+                intent.putExtra("photo_link", principal.getCover());
+                startActivity(intent);
+            }
+        });
+
         //  My Posts images
         layout_prof_images.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -243,8 +271,11 @@ public class MyProfileActivity extends ThemeSettingsActivity implements Progress
                         (LinearLayout) view.findViewById(R.id.bottomSheetFriendsContainer)
                 );
 
+
         TextView title = bottomSheetView.findViewById(R.id.title);
         title.setText(titleText);
+
+        SearchView searchView = bottomSheetView.findViewById(R.id.searchView);
 
         if (userList.isEmpty()) {
             TextView tv_display_friends = bottomSheetView.findViewById(R.id.tv_display_friends);
@@ -254,6 +285,31 @@ public class MyProfileActivity extends ThemeSettingsActivity implements Progress
             ViewGroup.LayoutParams layoutParams2 = tv_display_friends.getLayoutParams();
             layoutParams2.height = ViewGroup.LayoutParams.WRAP_CONTENT;
             tv_display_friends.setLayoutParams(layoutParams2);
+        }
+        else{
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+
+                    if (newText.length() > 0){
+                        List<User> userListSearched = new ArrayList<>();
+                        for (User user : userList){
+                            if (user.getFirstName().contains(newText) || user.getLastName().contains(newText)){
+                                userListSearched.add(user);
+                            }
+                        }
+                        friendAdapter = new FriendAdapter(MyProfileActivity.this, userListSearched, principalId, titleText);
+                        friendsRecyclerView.setAdapter(friendAdapter);
+                    }
+
+                    return false;
+                }
+            });
         }
 
         friendsRecyclerView = bottomSheetView.findViewById(R.id.recycler_friends);
@@ -325,9 +381,18 @@ public class MyProfileActivity extends ThemeSettingsActivity implements Progress
     // populate profile
     private void populateProfile(ProfileResponse response){
         tv_name.setText(String.format("@%s %s", response.getPrincipal().getFirstName(), response.getPrincipal().getLastName()));
-        tv_friends.setText(String.format("%s", response.getMyFriends().size()));
-        tv_request.setText(String.format("%s", response.getFriendRequests().size()));
-        tv_invited.setText(String.format("%s", response.getInvitedFriends().size()));
+        tv_friends.setText(String.format("%s", generalHelper.convertBigNumber(response.getMyFriends().size())));
+        tv_request.setText(String.format("%s", generalHelper.convertBigNumber(response.getFriendRequests().size())));
+        tv_invited.setText(String.format("%s", generalHelper.convertBigNumber(response.getInvitedFriends().size())));
+
+        // bio
+        if (response.getPrincipal().getBio().trim().length() < 1){
+            hideViewObject(tv_bio);
+        }else{
+            tv_bio.setText(String.format("%s", response.getPrincipal().getBio()));
+        }
+
+
         Picasso.get().load(response.getPrincipal().getCover()).placeholder(R.drawable.placeholder_image).into(iv_cover);
         Picasso.get().load(response.getPrincipal().getProfileThumb() == null || response.getPrincipal().getProfileThumb().isEmpty() ? response.getPrincipal().getProfile() : response.getPrincipal().getProfileThumb()).placeholder(R.drawable.profile3).into(iv_profile);
     }
@@ -388,6 +453,25 @@ public class MyProfileActivity extends ThemeSettingsActivity implements Progress
         ViewGroup.LayoutParams layoutParams = progressBarHorizon.getLayoutParams();
         layoutParams.height = 0;
         progressBarHorizon.setLayoutParams(layoutParams);
+    }
+
+    // show View Object
+    public void showViewObject(View view){
+        view.setVisibility(View.VISIBLE);
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+        layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        view.setLayoutParams(layoutParams);
+    }
+
+    // hide View Object
+    public void hideViewObject(View view){
+        // hide button
+        view.setVisibility(View.INVISIBLE);
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        layoutParams.width = 0;
+        layoutParams.height = 0;
+        view.setLayoutParams(layoutParams);
     }
 
 }

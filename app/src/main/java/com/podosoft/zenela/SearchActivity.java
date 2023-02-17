@@ -51,8 +51,6 @@ public class SearchActivity extends AppCompatActivity {
         random_people = findViewById(R.id.random_people);
         progressBar = findViewById(R.id.progress);
 
-        searchView.setIconified(false);
-
         sharedPreferences = this.getSharedPreferences("login", 0);
         email = sharedPreferences.getString("email", null);
         principalId = sharedPreferences.getLong("principalId", 0);
@@ -66,9 +64,10 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 tv_search_alert.setVisibility(View.INVISIBLE);
-                if (query.length() > 0)
+                if (query.length() > 0) {
                     showProgress();
-                managerProfile.searchPeople(searchResponseListener, query, principalId);
+                    managerProfile.searchPeople(searchResponseListener, query, principalId);
+                }
 
                 return true;
             }
@@ -76,9 +75,10 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 tv_search_alert.setVisibility(View.INVISIBLE);
-                if (newText.length() > 0)
+                if (newText.length() > 0) {
                     showProgress();
                     managerProfile.searchPeople(searchResponseListener, newText, principalId);
+                }
 
                 return true;
             }
@@ -92,6 +92,8 @@ public class SearchActivity extends AppCompatActivity {
                 managerProfile.searchRandomPeople(searchResponseListener, principalId);
             }
         });
+
+        random_people.callOnClick();
 
 
 

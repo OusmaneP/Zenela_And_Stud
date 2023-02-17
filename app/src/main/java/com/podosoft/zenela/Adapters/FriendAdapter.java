@@ -70,68 +70,57 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendsViewHolder>{
 
         // Message the Friend
         if (type_bottom_sheet.equals(context.getString(R.string.friends))){
-            holder.btn_message_friend.setVisibility(View.VISIBLE);
-            ViewGroup.LayoutParams layoutParams = holder.btn_message_friend.getLayoutParams();
-            layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-            holder.btn_message_friend.setLayoutParams(layoutParams);
+            // BTN Cancel Friend Request
+            showViewObject(holder.btn_cancel_friend_request);
+            holder.btn_cancel_friend_request.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // update data base
+                    managerProfile.cancelFriend(actionOnFriendRespListener, user.getId(), principalId);
+                    // hide button
+                    hideViewObject(holder.btn_cancel_friend_request);
+                }
+            });
         }
         else if (type_bottom_sheet.equals(context.getString(R.string.f_requests))){
             // BTN ACCEPT Friend Request
-            holder.btn_accept_friend_request.setVisibility(View.VISIBLE);
-            ViewGroup.LayoutParams layoutParams = holder.btn_accept_friend_request.getLayoutParams();
-            layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-            holder.btn_accept_friend_request.setLayoutParams(layoutParams);
+            showViewObject(holder.btn_accept_friend_request);
             holder.btn_accept_friend_request.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     // update data base
                     managerProfile.acceptFriendRequest(actionOnFriendRespListener, user.getId(), principalId);
-                    // hide button
-                    holder.btn_cancel_friend_request.setVisibility(View.INVISIBLE);
-                    ViewGroup.LayoutParams layoutParams2 = holder.btn_cancel_friend_request.getLayoutParams();
-                    layoutParams2.width = 0;
-                    holder.btn_cancel_friend_request.setLayoutParams(layoutParams2);
+                    // hide buttons cancel and accept
+                    hideViewObject(holder.btn_cancel_friend_request);
 
-                    holder.btn_accept_friend_request.setVisibility(View.INVISIBLE);
-                    ViewGroup.LayoutParams layoutParams3 = holder.btn_accept_friend_request.getLayoutParams();
-                    layoutParams3.width = 0;
-                    holder.btn_accept_friend_request.setLayoutParams(layoutParams3);
+                    hideViewObject(holder.btn_accept_friend_request);
                 }
             });
 
             // BTN Cancel Friend Request
-            holder.btn_cancel_friend_request.setVisibility(View.VISIBLE);
-            ViewGroup.LayoutParams layoutParams2 = holder.btn_cancel_friend_request.getLayoutParams();
-            layoutParams2.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-            holder.btn_cancel_friend_request.setLayoutParams(layoutParams2);
+            showViewObject(holder.btn_cancel_friend_request);
             holder.btn_cancel_friend_request.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     // update data base
                     managerProfile.cancelFriend(actionOnFriendRespListener, user.getId(), principalId);
                     // hide button
-                    holder.btn_accept_friend_request.setVisibility(View.INVISIBLE);
-                    ViewGroup.LayoutParams layoutParams = holder.btn_accept_friend_request.getLayoutParams();
-                    layoutParams.width = 0;
-                    holder.btn_accept_friend_request.setLayoutParams(layoutParams);
+                    hideViewObject(holder.btn_cancel_friend_request);
+
+                    hideViewObject(holder.btn_accept_friend_request);
                 }
             });
         }
         else if (type_bottom_sheet.equals(context.getString(R.string.f_invited))){
-            holder.btn_cancel_friend_request.setVisibility(View.VISIBLE);
-            ViewGroup.LayoutParams layoutParams2 = holder.btn_cancel_friend_request.getLayoutParams();
-            layoutParams2.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-            holder.btn_cancel_friend_request.setLayoutParams(layoutParams2);
+            //BTN Cancel Invited Friends
+            showViewObject(holder.btn_cancel_friend_request);
             holder.btn_cancel_friend_request.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     // update data base
                     managerProfile.cancelFriend(actionOnFriendRespListener, user.getId(), principalId);
                     // hide button
-                    holder.btn_cancel_friend_request.setVisibility(View.INVISIBLE);
-                    ViewGroup.LayoutParams layoutParams2 = holder.btn_cancel_friend_request.getLayoutParams();
-                    layoutParams2.width = 0;
-                    holder.btn_cancel_friend_request.setLayoutParams(layoutParams2);
+                    hideViewObject(holder.btn_cancel_friend_request);
                 }
             });
         }
@@ -169,9 +158,28 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendsViewHolder>{
 
         @Override
         public void didLogin(LoginResponse body, String message) {
-            Toast.makeText(context, "✅", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, context.getString(R.string.action_success), Toast.LENGTH_SHORT).show();
         }
     };
+
+    // show View Object
+    public void showViewObject(View view){
+        view.setVisibility(View.VISIBLE);
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+        layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        view.setLayoutParams(layoutParams);
+    }
+
+    // hide View Object
+    public void hideViewObject(View view){
+        // hide button
+        view.setVisibility(View.INVISIBLE);
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        layoutParams.width = 0;
+        layoutParams.height = 0;
+        view.setLayoutParams(layoutParams);
+    }
 }
 
 class FriendsViewHolder extends RecyclerView.ViewHolder{

@@ -122,16 +122,14 @@ public class NotificationsFragment extends Fragment {
 
             if (postNotifications.size() > 0 ){
                 for(PostNotification postNotification: postNotifications){
-                    if (postNotification.getHasRead()){
-
-                    }else {
+                    if (!postNotification.getHasSeen()){
                         canRequest = 1;
                         break;
                     }
                 }
 
                 if (canRequest == 1){
-                    manager.readPostNotifications(readPostNotificationResponseListener, principalId);
+                    manager.seePostNotifications(seePostNotificationResponseListener, principalId);
                 }
             }
         }
@@ -143,7 +141,7 @@ public class NotificationsFragment extends Fragment {
         }
     };
 
-    LoginResponseListener readPostNotificationResponseListener = new LoginResponseListener() {
+    LoginResponseListener seePostNotificationResponseListener = new LoginResponseListener() {
         @Override
         public void didError(String message) {
         }

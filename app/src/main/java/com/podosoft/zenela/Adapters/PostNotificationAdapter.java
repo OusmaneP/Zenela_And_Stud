@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,16 +15,20 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.podosoft.zenela.Interfaces.ProgressHorizonListener;
+import com.podosoft.zenela.Listeners.LoginResponseListener;
 import com.podosoft.zenela.Listeners.ViewPostResponseListener;
 import com.podosoft.zenela.Models.Post;
 import com.podosoft.zenela.Models.PostNotification;
 import com.podosoft.zenela.R;
 import com.podosoft.zenela.Requests.RequestManager;
+import com.podosoft.zenela.Responses.LoginResponse;
 import com.podosoft.zenela.Responses.ViewPostResponse;
 import com.podosoft.zenela.ViewPostActivity;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class PostNotificationAdapter extends RecyclerView.Adapter<PostNotificationViewHolder>{
 
@@ -51,6 +56,19 @@ public class PostNotificationAdapter extends RecyclerView.Adapter<PostNotificati
         PostNotification postNotification = postNotifications.get(position);
         holder.notifier_name.setText(postNotification.getNotifierName());
         holder.not_action.setText(R.string.and_others_reacted_to_your_post);
+
+        // Date
+        Locale loc = new Locale(context.getString(R.string.date_language), context.getString(R.string.date_country));
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, loc);
+        String date = dateFormat.format(postNotification.getCreatedAt());
+        holder.not_date.setText(date);
+
+        // if HasRead
+        if(!postNotification.getHasRead()){
+            holder.layoutNotification.setBackgroundColor(context.getResources().getColor(R.color.gray_day_night));
+        }
+
+        // image Notifier
         Picasso.get().load(postNotification.getNotifierProfile()).placeholder(R.drawable.profile2).into(holder.notifier_profile);
 
         requestManager = new RequestManager(context);
@@ -61,6 +79,10 @@ public class PostNotificationAdapter extends RecyclerView.Adapter<PostNotificati
             public void onClick(View view) {
                 progressHorizonListener.showHorProg();
                 requestManager.viewPost(viewPostResponseListener, principalId, postNotification.getPostId());
+                if (!postNotification.getHasRead()){
+                    requestManager.readPostNotifications(readPostNotificationResponseListener, principalId, postNotification.getId());
+                    postNotification.setHasRead(true);
+                }
             }
         });
 
@@ -91,11 +113,24 @@ public class PostNotificationAdapter extends RecyclerView.Adapter<PostNotificati
             Toast.makeText(context, context.getString(R.string.action_failed_ic), Toast.LENGTH_SHORT).show();
         }
     };
+
+    LoginResponseListener readPostNotificationResponseListener = new LoginResponseListener() {
+        @Override
+        public void didError(String message) {
+            Toast.makeText(context, context.getString(R.string.action_failed_ic), Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void didLogin(LoginResponse body, String message) {
+            Toast.makeText(context, context.getString(R.string.sent), Toast.LENGTH_SHORT).show();
+        }
+    };
 }
 
 
 class PostNotificationViewHolder extends RecyclerView.ViewHolder{
     CardView post_notification_container;
+    LinearLayout layoutNotification;
     TextView notifier_name, not_action, not_date;
     ImageView notifier_profile;
 
@@ -107,5 +142,7 @@ class PostNotificationViewHolder extends RecyclerView.ViewHolder{
         not_action = itemView.findViewById(R.id.not_action);
         not_date = itemView.findViewById(R.id.not_date);
         notifier_profile = itemView.findViewById(R.id.notifier_profile);
+
+        layoutNotification = itemView.findViewById(R.id.layout_notification);
     }
 }

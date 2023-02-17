@@ -55,13 +55,13 @@
                 <ImageView
                     android:id="@+id/iv_cover"
                     android:layout_width="wrap_content"
-                    android:layout_height="300dp"
+                    android:layout_height="wrap_content"
                     android:scaleType="fitCenter"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/placeholder_image"
                     android:adjustViewBounds="true"
+                    android:maxHeight="300dp"
                     />
 
 
@@ -104,10 +104,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Name"
-                android:textSize="20sp"
+                android:textSize="17sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/tv_bio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_margin="5dp"/>
 
             <!--    LinearLayout FRIENDSHIP-->
             <LinearLayout
@@ -189,9 +197,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:padding="3dp"
                 android:id="@+id/linearLayout_albums"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="5dp">
+
 
                 <Button
                     android:id="@+id/btn_create_post"

@@ -8,13 +8,21 @@
     android:gravity="center"
     tools:context=".ViewPhotoActivity">
 
-    <ImageView
-        android:id="@+id/iv_view_photo"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="fitCenter"
-        android:layout_gravity="center"
-        android:adjustViewBounds="true"
-        android:contentDescription="Image Post" />
+        android:layout_height="match_parent"
+        >
+
+        <ImageView
+            android:id="@+id/iv_view_photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:contentDescription="Image Post" />
+
+
+    </FrameLayout>
 
 </LinearLayout>

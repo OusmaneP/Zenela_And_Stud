@@ -19,6 +19,8 @@ public class PostNotification implements Serializable {
 
     private boolean hasRead;
 
+    private boolean hasSeen;
+
     private String notifierName;
 
     private String notifierProfile;
@@ -117,5 +119,13 @@ public class PostNotification implements Serializable {
 
     public void setHasRead(boolean hasRead) {
         this.hasRead = hasRead;
+    }
+
+    public boolean getHasSeen() {
+        return hasSeen;
+    }
+
+    public void setHasSeen(boolean hasSeen) {
+        this.hasSeen = hasSeen;
     }
 }

@@ -22,9 +22,10 @@
     <color name="white">#FF000000</color>
     <color name="some_white1">#E0FFFF</color>
     <color name="some_blue1">#1E90FF</color>
-    <color name="gray">#D1D1D1</color>
     <color name="red">#FF0000</color>
     <color name="ic_color">#FFFFFFFF</color>
+
+    <color name="gray_day_night">#222222</color>
 
 
 </resources>

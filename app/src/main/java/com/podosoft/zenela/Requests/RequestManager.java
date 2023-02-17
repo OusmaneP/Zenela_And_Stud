@@ -40,7 +40,7 @@ public class RequestManager {
     OkHttpClient okHttpClient = new OkHttpClient();
     OkHttpClient clientWith1mTimeout = okHttpClient.newBuilder().readTimeout(5, TimeUnit.MINUTES).build();
     Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://192.168.77.118:8080/mobile/")
+            .baseUrl("http://192.168.203.118:8080/mobile/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(clientWith1mTimeout)
             .build();
@@ -328,13 +328,35 @@ public class RequestManager {
         });
     }
 
-    ////////////  Random Videos
-    public void readPostNotifications(LoginResponseListener listener, Long principalId){
-        CallReadPostNotifications callReadPostNotifications = retrofit.create(CallReadPostNotifications.class);
-        Call<LoginResponse> call = callReadPostNotifications.callReadPostNotifications(principalId);
+    ////////////  See Post Notifications
+    public void seePostNotifications(LoginResponseListener listener, Long principalId){
+        CallSeePostNotifications callSeePostNotifications = retrofit.create(CallSeePostNotifications.class);
+        Call<LoginResponse> call = callSeePostNotifications.callSeePostNotifications(principalId);
 
         call.enqueue(new Callback<LoginResponse>() {
 
+            @Override
+            public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
+                if (!response.isSuccessful()){
+                    listener.didError(response.message());
+                    return;
+                }
+                listener.didLogin(response.body(), response.message());
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
+                listener.didError(t.getMessage());
+            }
+        });
+    }
+
+    ////////////  Read Post Notifications
+    public void readPostNotifications(LoginResponseListener listener, Long principalId, Long notificationId){
+        CallReadPostNotifications callReadPostNotifications = retrofit.create(CallReadPostNotifications.class);
+        Call<LoginResponse> call = callReadPostNotifications.callReadPostNotifications(principalId, notificationId);
+
+        call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
                 if (!response.isSuccessful()){
@@ -436,7 +458,7 @@ public class RequestManager {
         );
     }
 
-    /////****** UnSave a post   ******
+    /////****** Report a post   ******
     private interface CallReportAPost{
         @POST("report_post")
         Call<LoginResponse> callReportPost(
@@ -456,7 +478,7 @@ public class RequestManager {
         );
     }
 
-    // UnSave a post
+    // View a post
     private interface CallViewPost{
         @GET("view_post")
         Call<ViewPostResponse> callViewPost(
@@ -465,11 +487,20 @@ public class RequestManager {
         );
     }
 
+    // See Notifications
+    private interface CallSeePostNotifications{
+        @POST("see_post_notifications")
+        Call<LoginResponse> callSeePostNotifications(
+                @Query("principalId") Long principalId
+        );
+    }
+
     // Read Notifications
     private interface CallReadPostNotifications{
-        @POST("read_post_notifications")
+        @POST("read_post_notification")
         Call<LoginResponse> callReadPostNotifications(
-                @Query("principalId") Long principalId
+                @Query("principalId") Long principalId,
+                @Query("notificationId") Long notificationId
         );
     }
 

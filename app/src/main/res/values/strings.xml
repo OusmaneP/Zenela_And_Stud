@@ -97,5 +97,6 @@
 
     <string name="date_language">en</string>
     <string name="date_country">US</string>
+    <string name="action_success">✅ Done</string>
 
 </resources>

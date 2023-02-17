@@ -22,6 +22,7 @@ import com.podosoft.zenela.Interfaces.ProgressHorizonListener;
 import com.podosoft.zenela.Listeners.LoginResponseListener;
 import com.podosoft.zenela.Listeners.RandomVideosResponseListener;
 import com.podosoft.zenela.Models.Post;
+import com.podosoft.zenela.MyHelpers.GeneralHelper;
 import com.podosoft.zenela.Requests.RequestManagerProfile;
 import com.podosoft.zenela.Responses.LoginResponse;
 import com.podosoft.zenela.Responses.ProfileResponse;
@@ -33,8 +34,8 @@ import java.util.ArrayList;
 public class ViewProfileActivity extends ThemeSettingsActivity implements ProgressHorizonListener {
 
     ImageView iv_cover, iv_profile, iv_layout_prof_images, iv_layout_prof_videos;
-    TextView tv_name, tv_friends, tv_request, tv_invited;
-    Button btn_invite_friend, btn_message_friend;
+    TextView tv_name, tv_friends, tv_request, tv_invited, tv_bio;
+    Button btn_invite_friend, btn_cancel_friend;
     LinearLayout  layout_prof_videos, layout_prof_images;
     ProgressBar progressBarHorizon;
 
@@ -48,6 +49,7 @@ public class ViewProfileActivity extends ThemeSettingsActivity implements Progre
     long principalId;
     String email;
 
+    GeneralHelper generalHelper;
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,7 @@ public class ViewProfileActivity extends ThemeSettingsActivity implements Progre
         email = sharedPreferences.getString("email", null);
         principalId = sharedPreferences.getLong("principalId", 0);
 
+        generalHelper = new GeneralHelper();
         // init views
 
         iv_cover = findViewById(R.id.iv_cover);
@@ -68,6 +71,7 @@ public class ViewProfileActivity extends ThemeSettingsActivity implements Progre
         tv_friends = findViewById(R.id.tv_friends);
         tv_request = findViewById(R.id.tv_request);
         tv_invited = findViewById(R.id.tv_invited);
+        tv_bio = findViewById(R.id.tv_bio);
 
         iv_layout_prof_images = findViewById(R.id.iv_layout_prof_images);
         iv_layout_prof_videos = findViewById(R.id.iv_layout_prof_videos);
@@ -76,8 +80,10 @@ public class ViewProfileActivity extends ThemeSettingsActivity implements Progre
         layout_prof_videos = findViewById(R.id.layout_prof_videos);
 
         btn_invite_friend = findViewById(R.id.btn_invite_friend);
-        btn_message_friend = findViewById(R.id.btn_message_friend);
+        btn_cancel_friend = findViewById(R.id.btn_cancel_friend);
         progressBarHorizon = findViewById(R.id.progressBarHorizon);
+
+        hideHorProg();
 
         // managerProfile
         managerProfile = new RequestManagerProfile(ViewProfileActivity.this);
@@ -130,16 +136,36 @@ public class ViewProfileActivity extends ThemeSettingsActivity implements Progre
                 startActivity(intent);
             }
         });
+
+        // Cover Photo Clicked
+        iv_cover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ViewProfileActivity.this, ViewPhotoActivity.class);
+                intent.putExtra("photo_link", response.getPrincipal().getCover());
+                startActivity(intent);
+            }
+        });
+
     }
 
     // populate profile
     private void populateProfile(ProfileResponse response){
         tv_name.setText(String.format("@%s %s", response.getPrincipal().getFirstName(), response.getPrincipal().getLastName()));
-        tv_friends.setText(String.format("%s", response.getMyFriends().size()));
-        tv_request.setText(String.format("%s", response.getFriendRequests().size()));
-        tv_invited.setText(String.format("%s", response.getInvitedFriends().size()));
+        tv_friends.setText(String.format("%s", generalHelper.convertBigNumber(response.getMyFriends().size())));
+        tv_request.setText(String.format("%s", generalHelper.convertBigNumber(response.getFriendRequests().size())));
+        tv_invited.setText(String.format("%s", generalHelper.convertBigNumber(response.getInvitedFriends().size())));
+
+        // bio
+        if (response.getPrincipal().getBio().trim().length() < 1){
+            hideViewObject(tv_bio);
+        }else{
+            tv_bio.setText(String.format("%s", response.getPrincipal().getBio()));
+        }
+
         Picasso.get().load(response.getPrincipal().getCover()).placeholder(R.drawable.placeholder_image).error(R.drawable.placeholder_image).into(iv_cover);
         Picasso.get().load(response.getPrincipal().getProfileThumb() == null || response.getPrincipal().getProfileThumb().isEmpty() ? response.getPrincipal().getProfile() : response.getPrincipal().getProfileThumb()).placeholder(R.drawable.profile3).error(R.drawable.profile3).into(iv_profile);
+
         // btn Add Friend
         if (!response.getFriends() && !response.getPrincipal().getId().equals(principalId)){
             btn_invite_friend.setVisibility(View.VISIBLE);
@@ -149,16 +175,29 @@ public class ViewProfileActivity extends ThemeSettingsActivity implements Progre
             btn_invite_friend.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    // update data base
                     managerProfile.sendFriendRequest(inviteResponseListener, response.getPrincipal().getId(), principalId);
+                    // hide button
+                    hideViewObject(btn_invite_friend);
                 }
             });
         }
-        // btn Message
+        // btn Cancel
         if (response.getFriends() && !response.getPrincipal().getId().equals(principalId)){
-            btn_message_friend.setVisibility(View.VISIBLE);
-            ViewGroup.LayoutParams layoutParams = btn_message_friend.getLayoutParams();
+            btn_cancel_friend.setVisibility(View.VISIBLE);
+            ViewGroup.LayoutParams layoutParams = btn_cancel_friend.getLayoutParams();
             layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-            btn_message_friend.setLayoutParams(layoutParams);
+            btn_cancel_friend.setLayoutParams(layoutParams);
+
+            btn_cancel_friend.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // update data base
+                    managerProfile.cancelFriend(actionOnFriendRespListener, response.getPrincipal().getId(), principalId);
+                    // hide button
+                    hideViewObject(btn_cancel_friend);
+                }
+            });
         }
     }
 
@@ -200,7 +239,6 @@ public class ViewProfileActivity extends ThemeSettingsActivity implements Progre
     private LoginResponseListener inviteResponseListener = new LoginResponseListener() {
         @Override
         public void didLogin(LoginResponse body, String message) {
-            btn_invite_friend.setVisibility(View.INVISIBLE);
             Toast.makeText(ViewProfileActivity.this, getString(R.string.sent), Toast.LENGTH_LONG).show();
         }
 
@@ -226,6 +264,18 @@ public class ViewProfileActivity extends ThemeSettingsActivity implements Progre
         }
     };
 
+    private final LoginResponseListener actionOnFriendRespListener = new LoginResponseListener() {
+        @Override
+        public void didError(String message) {
+            Toast.makeText(ViewProfileActivity.this, getString(R.string.action_failed_ic), Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void didLogin(LoginResponse body, String message) {
+            Toast.makeText(ViewProfileActivity.this, getString(R.string.action_success), Toast.LENGTH_LONG).show();
+        }
+    };
+
     @Override
     public void showHorProg() {
         progressBarHorizon.setVisibility(View.VISIBLE);
@@ -240,5 +290,14 @@ public class ViewProfileActivity extends ThemeSettingsActivity implements Progre
         ViewGroup.LayoutParams layoutParams = progressBarHorizon.getLayoutParams();
         layoutParams.height = 0;
         progressBarHorizon.setLayoutParams(layoutParams);
+    }
+
+    public void hideViewObject(View view){
+        // hide button
+        view.setVisibility(View.INVISIBLE);
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        layoutParams.width = 0;
+        layoutParams.height = 0;
+        view.setLayoutParams(layoutParams);
     }
 }

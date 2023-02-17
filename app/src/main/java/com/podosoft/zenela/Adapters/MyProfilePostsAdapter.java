@@ -26,6 +26,7 @@ import com.podosoft.zenela.Listeners.ProfileResponseListener;
 import com.podosoft.zenela.Models.Comment;
 import com.podosoft.zenela.Models.Post;
 import com.podosoft.zenela.Models.User;
+import com.podosoft.zenela.MyHelpers.GeneralHelper;
 import com.podosoft.zenela.R;
 import com.podosoft.zenela.Requests.RequestManager;
 import com.podosoft.zenela.Requests.RequestManagerProfile;
@@ -51,11 +52,11 @@ public class MyProfilePostsAdapter extends RecyclerView.Adapter<MyProfilePostsVi
     Long principalId;
     User principal;
     TextView likedArea;
-
-
     // Recycler view
     RecyclerView postCommentsRecyclerView;
     PostCommentsAdapter commentsAdapter;
+
+    GeneralHelper generalHelper;
 
     public MyProfilePostsAdapter(Context context, List<Post> posts, User principal, RequestManager manager, Long principalId, RequestManagerProfile managerProfile) {
         this.context = context;
@@ -64,6 +65,7 @@ public class MyProfilePostsAdapter extends RecyclerView.Adapter<MyProfilePostsVi
         this.manager = manager;
         this.principalId = principalId;
         this.managerProfile = managerProfile;
+        this.generalHelper = new GeneralHelper();
     }
 
 
@@ -109,8 +111,8 @@ public class MyProfilePostsAdapter extends RecyclerView.Adapter<MyProfilePostsVi
             });
         }
 
-        holder.textView_likes.setText(String.format("%s %s", String.valueOf(post.getLikingPossibility().getTotalLikes()), context.getString(R.string.likes)));
-        holder.textView_comments.setText(String.format("%s %s", String.valueOf(post.getTotalComments()), context.getString(R.string.comments)));
+        holder.textView_likes.setText(String.format("%s %s", generalHelper.convertBigNumber(post.getLikingPossibility().getTotalLikes()), context.getString(R.string.likes)));
+        holder.textView_comments.setText(String.format("%s %s", generalHelper.convertBigNumber(post.getTotalComments()), context.getString(R.string.comments)));
 
         Picasso.get().load(post.getPosterProfile()).placeholder(R.drawable.profile2).error(R.drawable.profile2).into(holder.poster_profile);
         Picasso.get().load(post.getFileName()).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.placeholder_image).error(R.drawable.placeholder_image).into(holder.imageView_post);
@@ -264,9 +266,11 @@ public class MyProfilePostsAdapter extends RecyclerView.Adapter<MyProfilePostsVi
                 btnSubmit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        managerProfile.updatePostComment(updatePostResponseListener, principalId, post.getId(), etComment.getText().toString());
+                        if (etComment.getText().toString().length() > 0) {
+                            managerProfile.updatePostComment(updatePostResponseListener, principalId, post.getId(), etComment.getText().toString());
+                            bottomSheetDialog.hide();
+                        }
 
-                        bottomSheetDialog.hide();
                     }
                 });
 

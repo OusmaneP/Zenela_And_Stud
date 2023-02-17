@@ -90,4 +90,5 @@
 
     <string name="date_language">fr</string>
     <string name="date_country">FR</string>
+    <string name="action_success">✅ Fait</string>
 </resources>

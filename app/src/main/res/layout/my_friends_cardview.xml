@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -21,53 +22,60 @@
             >
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/friend_profile"
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_width="73dp"
+                android:layout_height="73dp"
                 android:layout_marginEnd="6dp"
                 app:civ_border_width="1dp"
                 app:civ_border_color="@color/gray"
                 />
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/friend_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
+                    android:textSize="17sp"
                     android:textStyle="bold"
                     />
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="end">
+                    <Button
+                        android:id="@+id/btn_message_friend"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:text="@string/message"
+                        android:drawableStart="@drawable/ic_message"
+                        android:visibility="invisible"
+                        tools:ignore="Suspicious0dp" />
+                    <Button
+                        android:id="@+id/btn_accept_friend_request"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:text="@string/accept"
+                        android:drawableStart="@drawable/ic_person_add"
+                        android:visibility="invisible"
+                        tools:ignore="Suspicious0dp" />
+                    <Button
+                        android:id="@+id/btn_cancel_friend_request"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:text="@string/cancel"
+                        android:drawableStart="@drawable/ic_cancel"
+                        android:visibility="invisible"
+                        tools:ignore="Suspicious0dp" />
+                </LinearLayout>
+
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btn_message_friend"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:text="@string/message"
-                android:drawableStart="@drawable/ic_message"
-                android:visibility="invisible"
-                />
-            <Button
-                android:id="@+id/btn_accept_friend_request"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:text="@string/accept"
-                android:drawableStart="@drawable/ic_person_add"
-                android:visibility="invisible"
-                />
-            <Button
-                android:id="@+id/btn_cancel_friend_request"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:text="@string/cancel"
-                android:drawableStart="@drawable/ic_cancel"
-                android:visibility="invisible"
-                />
+
         </LinearLayout>
 
     </LinearLayout>

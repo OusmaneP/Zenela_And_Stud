@@ -30,6 +30,7 @@ import com.podosoft.zenela.Listeners.ProfileResponseListener;
 import com.podosoft.zenela.Models.Comment;
 import com.podosoft.zenela.Models.Post;
 import com.podosoft.zenela.Models.User;
+import com.podosoft.zenela.MyHelpers.GeneralHelper;
 import com.podosoft.zenela.R;
 import com.podosoft.zenela.Requests.RequestManager;
 import com.podosoft.zenela.Requests.RequestManagerProfile;
@@ -63,6 +64,8 @@ public class RandomPostsAdapter extends RecyclerView.Adapter<RandomPostViewHolde
 
     ProgressHorizonListener progressHorizonListener;
 
+    GeneralHelper generalHelper;
+
     public RandomPostsAdapter(Context context, List<Post> posts, User principal, RequestManager manager, Long principalId, RequestManagerProfile managerProfile) {
         this.context = context;
         this.posts = posts;
@@ -71,6 +74,7 @@ public class RandomPostsAdapter extends RecyclerView.Adapter<RandomPostViewHolde
         this.principalId = principalId;
         this.managerProfile = managerProfile;
         progressHorizonListener = (ProgressHorizonListener) context;
+        this.generalHelper = new GeneralHelper();
     }
 
 
@@ -117,8 +121,8 @@ public class RandomPostsAdapter extends RecyclerView.Adapter<RandomPostViewHolde
             });
         }
 
-        holder.textView_likes.setText(String.format("%s %s", String.valueOf(post.getLikingPossibility().getTotalLikes()), context.getString(R.string.likes)));
-        holder.textView_comments.setText(String.format("%s %s", String.valueOf(post.getTotalComments()), context.getString(R.string.comments)));
+        holder.textView_likes.setText(String.format("%s %s", generalHelper.convertBigNumber(post.getLikingPossibility().getTotalLikes()), context.getString(R.string.likes)));
+        holder.textView_comments.setText(String.format("%s %s", generalHelper.convertBigNumber(post.getTotalComments()), context.getString(R.string.comments)));
 
         Picasso.get().load(post.getPosterProfile()).placeholder(R.drawable.profile2).error(R.drawable.profile2).into(holder.poster_profile);
         Picasso.get().load(post.getFileName()).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.placeholder_image).error(R.drawable.placeholder_image).into(holder.imageView_post);
